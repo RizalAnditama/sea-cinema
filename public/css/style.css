@@ -1,0 +1,43 @@
+.grad-left {
+  background-image: linear-gradient(
+    to left,
+    rgba(255, 0, 0, 1),
+    rgba(0, 0, 0, 0)
+  );
+}
+
+.grad-right {
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 0, 0, 1),
+    rgba(0, 0, 0, 0)
+  );
+}
+
+.grad-mid {
+  background-image: linear-gradient(rgba(255, 0, 0, 1), rgba(0, 0, 0, 0));
+}
+
+.underline {
+  text-decoration: underline;
+  text-underline-offset: 8px;
+  text-decoration-color: red;
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+
+.vertical-truncate {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.scrollmenu{
+  overflow: auto;
+}
