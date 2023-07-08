@@ -1,7 +1,7 @@
 # SEA Cinema
 
 ## What is this?
-Apparently this tiny cinema webapp project is supposed to be a requirement for joining [COMPFEST's Software Engineering Academy](https://www.compfest.id/academy/sea). 
+This cinema webapp project is a requirement for joining [COMPFEST's Software Engineering Academy](https://www.compfest.id/academy/sea). 
 
 ## How to preview/run?
 You can preview it with the link [here]()
