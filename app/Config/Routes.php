@@ -31,6 +31,16 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'HomeController::index');
 $routes->add('explore', 'HomeController::explore');
+$routes->get('/explore/(:any)', 'HomeController::explore/$1');
+
+$routes->add('register', 'UserController::register', ['filter' => 'noauth']);
+$routes->add('login', 'UserController::login', ['filter' => 'noauth']);
+$routes->post('logout', 'UserController::logout', ['filter' => 'auth']);
+$routes->get('account', 'UserController::account', ['filter' => 'auth']);
+
+$routes->post('topup', 'UserController::topup', ['filter' => 'auth']);
+$routes->post('withdraw', 'UserController::withdraw', ['filter' => 'auth']);
+$routes->post('cancel/(:any)', 'MovieController::cancel/$1', ['filter' => 'auth']);
 
 /*
  * --------------------------------------------------------------------

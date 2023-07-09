@@ -1,4 +1,22 @@
-<div class="container d-md-block d-none">
+<?php
+
+use App\Models\UserModel;
+
+$error = [
+    'name' => false,
+    'email' => false,
+    'birthdate' => false,
+    'password' => false,
+    'password_confirm' => false,
+];
+
+if (session()->get('isLoggedIn')) {
+    $model = new UserModel();
+    $userData = $model->find(session()->get('id'));
+}
+
+?>
+<div class="container d-lg-block d-none">
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 border-bottom">
         <div class="col-md-3 mb-2 mb-md-0">
             <a href="<?= base_url() ?>" class="d-inline-flex link-body-emphasis text-decoration-none h3">
@@ -14,13 +32,17 @@
             <div class="btn-group" role="group" aria-label="Basic outlined example">
                 <button type="button" class="btn btn-outline-danger rounded-3" data-bs-toggle="modal" data-bs-target="#search"><i class="bi bi-search"></i> Search</button>
             </div>
-            <span class="mx-3 underline">Rp0</span>
-            <button type="button" class="btn btn-danger fw-bold" data-bs-toggle="modal" data-bs-target="#signin">Login</button>
+            <?php if (session()->get('isLoggedIn')) : ?>
+                <a href="<?= site_url('account#balance') ?>" class="mx-3 underline text-white"><?= 'Rp. ' . number_format($userData['balance'], 0, ',', '.') ?></a>
+                <a href="<?= base_url('account') ?>" class="btn btn-danger fw-bold">Account</a>
+            <?php else : ?>
+                <button type="button" class="btn btn-danger fw-bold" data-bs-toggle="modal" data-bs-target="#signin">Login</button>
+            <?php endif; ?>
         </div>
     </header>
 </div>
 
-<nav class="navbar navbar-expand-lg bg-body-tertiary d-sm-block d-md-none">
+<nav class="navbar navbar-expand-lg bg-body-tertiary d-sm-block d-lg-none">
     <div class="container-fluid">
         <a href="<?= base_url() ?>" class="navbar-brand d-inline-flex link-body-emphasis text-decoration-none h3">
             SEA&nbsp;<span class="text-danger">Cinema</span>
@@ -36,11 +58,22 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<?= base_url('explore') ?>">Explore</a>
                 </li>
+                <!-- <span class="mb-3" style="text-underline-offset: 8px; text-decoration-color: red;">Rp0</span> -->
+                <?php if (!session()->get('isLoggedIn')) : ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#signin" data-bs-toggle="modal" data-bs-target="#signin">Sign in</a>
+                    </li>
+                    <!-- <button class="w-100 btn btn-md rounded-3 btn-outline-danger mt-2" data-bs-toggle="modal" data-bs-target="#signin">Login</button> -->
+                <?php else : ?>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="<?= base_url('account#balance') ?>">Account (<?= 'Rp. ' . number_format($userData['balance'], 0, ',', '.') ?>)</a>
+                    </li>
+                <?php endif ?>
             </ul>
-
-            <!-- <span class="mb-3" style="text-underline-offset: 8px; text-decoration-color: red;">Rp0</span> -->
-
-            <button class="w-100 btn btn-md rounded-3 btn-outline-danger" data-bs-toggle="modal" data-bs-target="#signin">Login</button>
+            <div class="btn-group rounded-5 d-flex my-3" role="group" aria-label="Basic outlined example">
+                <input required class="form-control rounded-0" type="text" placeholder="Search by keyword">
+                <button type="button" class="btn btn-outline-success">search</button>
+            </div>
         </div>
     </div>
 </nav>
@@ -56,9 +89,9 @@
             <div class="modal-body p-5 pt-0">
                 <h1 class="fw-bold mb-0 fs-3">What are you searching for?</h1>
                 <hr>
-                <form class="">
+                <form action="<?= base_url('explore') ?>" method="get">
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control rounded-3" id="search" placeholder="sada">
+                        <input required type="text" name="keyword" class="form-control rounded-3" id="search" placeholder="sada">
                         <label for="search">Search by Keyword</label>
                     </div>
                     <button class="w-100 btn btn-lg rounded-3 btn-outline-danger" type="submit">Search</button>
@@ -78,14 +111,20 @@
             <div class="modal-body p-5 pt-0">
                 <h1 class="fw-bold mb-0 fs-2">Login</h1>
                 <hr>
-                <form class="">
+                <form action="<?= base_url('login') ?>" method="post">
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control rounded-3" id="name" placeholder="sada">
-                        <label for="name">Name</label>
+                        <input required type="email" class="form-control rounded-3 <?= ($error['email']) ? 'is-invalid' : ''; ?>" id="email" value="<?= old('email') ?>" placeholder="sada" name="email">
+                        <label for="email">Email</label>
+                        <div id="invalid-email" class="invalid-feedback">
+                            <?= $error['email'] ?? '' ?>
+                        </div>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="password" class="form-control rounded-3" id="password" placeholder="Password">
+                        <input required type="password" class="form-control rounded-3" id="password" placeholder="Password" <?= ($error['password']) ? 'is-invalid' : ''; ?> name="password">
                         <label for="password">Password</label>
+                        <div id="invalid-password" class="invalid-feedback">
+                            <?= $error['password'] ?? '' ?>
+                        </div>
                     </div>
                     <button class="w-100 btn btn-lg rounded-3 btn-outline-danger" type="submit">Enter</button>
                 </form>
@@ -107,22 +146,41 @@
             </div>
 
             <div class="modal-body p-5 pt-0">
-                <form class="">
+                <form action="<?= base_url('register') ?>" method="post">
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control rounded-3" id="name" placeholder="asd">
+                        <input required type="text" name="name" class="form-control rounded-3 <?= ($error['name']) ? 'is-invalid' : ''; ?>" id="name" value="<?= old('name') ?>" placeholder="name">
                         <label for="name">Name</label>
+                        <div id="invalid-name" class="invalid-feedback">
+                            <?= $error['name'] ?? '' ?>
+                        </div>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="email" class="form-control rounded-3" id="floatingInput" placeholder="name@example.com">
+                        <input required type="email" name="email" class="form-control rounded-3 <?= ($error['email']) ? 'is-invalid' : ''; ?>" id="floatingInput" value="<?= old('email') ?>" placeholder="name@example.com">
                         <label for="floatingInput">Email address</label>
+                        <div id="invalid-email" class="invalid-feedback">
+                            <?= $error['email'] ?? '' ?>
+                        </div>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="password" class="form-control rounded-3" id="password1" placeholder="Password1">
-                        <label for="password">Password</label>
+                        <input required type="date" name="birthdate" class="form-control rounded-3 <?= ($error['birthdate']) ? 'is-invalid' : ''; ?>" id="birthdate" value="<?= old('birthdate') ?>" placeholder="lol">
+                        <label for="birthdate">Birth date</label>
+                        <div id="invalid-birthdate" class="invalid-feedback">
+                            <?= $error['birthdate'] ?? '' ?>
+                        </div>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="password" class="form-control rounded-3" id="password2" placeholder="Password">
+                        <input required type="password" name="password" class="form-control rounded-3 <?= ($error['password']) ? 'is-invalid' : ''; ?>" id="password1" value="<?= old('password') ?>" placeholder="Password1">
+                        <label for="password1">Password</label>
+                        <div id="invalid-password" class="invalid-feedback">
+                            <?= $error['password'] ?? '' ?>
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input required type="password" name="password_confirm" class="form-control rounded-3 <?= ($error['password_confirm']) ? 'is-invalid' : ''; ?>" id="password2" placeholder="Password">
                         <label for="password2">Confirm Password</label>
+                        <div id="invalid-password_confirm" class="invalid-feedback">
+                            <?= $error['password_confirm'] ?? '' ?>
+                        </div>
                     </div>
                     <button class="w-100 mb-2 btn btn-lg rounded-3 btn-danger" type="submit">Sign up</button>
                 </form>

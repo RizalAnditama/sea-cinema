@@ -21,8 +21,8 @@
                 <div class="carousel-caption grad-right rounded-5 text-white bg-opacity-50 px-5 text-start">
                     <h1>Funsies Full of Fantasies.</h1>
                     <p>Take a break and chill!</p>
-                    <p><a class="btn d-xs-block d-sm-none btn-outline-light" href="#">Find out</a></p>
-                    <p><a class="btn d-none d-sm-inline-flex btn-lg btn-outline-light" href="#">Find out</a></p>
+                    <p><a class="btn d-xs-block d-md-none btn-outline-light" href="explore">Find out</a></p>
+                    <p><a class="btn d-none d-sm-inline-flex btn-lg btn-outline-light" href="explore">Find out</a></p>
                 </div>
             </div>
         </div>
@@ -39,7 +39,7 @@
                 <div class="carousel-caption grad-mid rounded-5 rounded text-white bg-opacity-50 px-5">
                     <h1>Zero Worries Ticket.</h1>
                     <p>Guarantee refund free.</p>
-                    <p><a class="btn d-xs-block d-sm-none btn-outline-light" href="#">Learn more</a></p>
+                    <p><a class="btn d-xs-block d-md-none btn-outline-light" href="#">Learn more</a></p>
                     <p><a class="btn d-none d-sm-inline-flex btn-lg btn-outline-light" href="#">Learn more</a></p>
                 </div>
             </div>
@@ -57,8 +57,8 @@
                 <div class="carousel-caption grad-left rounded-5 text-white bg-opacity-50 px-5 text-end">
                     <h1>Trending and Happening.</h1>
                     <p class="">The hottest in the cinema.</p>
-                    <p><a class="btn d-xs-block d-sm-none btn-outline-light" href="#">Explore</a></p>
-                    <p><a class="btn d-none d-sm-inline-flex btn-lg btn-outline-light" href="#">Explore</a></p>
+                    <p><a class="btn d-xs-block d-md-none btn-outline-light" href="explore#popular">Explore</a></p>
+                    <p><a class="btn d-none d-sm-inline-flex btn-lg btn-outline-light" href="explore#popular">Explore</a></p>
                 </div>
             </div>
         </div>
@@ -74,44 +74,48 @@
 </div>
 <br>
 
-
-<span class="fw-bold mb-0 fs-2 grad-right p-3 my-3 rounded-5">Popular</span>
+<span id="popular" class="fw-bold mb-0 fs-2 grad-right p-3 my-3 rounded-5">Popular</span>
 <!-- <div id="popular" class="my-4 d-flex justify-content-center align-items-center overflow-x-auto"> -->
-<div id="popular" class="my-4 row">
+<div class="my-4 row">
     <?php foreach ($popular as $row) :
     ?>
         <div class="col-lg-3 col-sm-4 col-6 d-flex align-items-stretch">
             <div class="card border-0 mb-md-3">
-                <a href="#">
+                <a href="<?= base_url('explore/' . $row['name']) ?>">
                     <img loading="lazy" class="d-md-block d-none bd-placeholder-img card-img-top" src="<?= $row['poster_url'] ?>" alt="<?= $row['name'] ?>" style="width: 200px;">
-                    <img loading="lazy" class="d-xs-block d-sm-none bd-placeholder-img card-img-top" src="<?= $row['poster_url'] ?>" alt="<?= $row['name'] ?>" style="width: 100px;">
+                    <img loading="lazy" class="d-xs-block d-md-none bd-placeholder-img card-img-top" src="<?= $row['poster_url'] ?>" alt="<?= $row['name'] ?>" style="width: 100px;">
                 </a>
                 <div class="card-body">
                     <span class="card-text"><?= $row['age_rating'] ?>+</span><br>
-                    <a href="#" class="vertical-truncate d-xs-block d-sm-none card-title fw-bold text-decoration-none"><?= $row['name'] ?></a>
-                    <a href="#" class=" d-md-block d-none card-title h3 text-decoration-none"><?= $row['name'] ?></a>
+                    <a href="<?= base_url('explore/' . $row['name']) ?>" class="vertical-truncate d-xs-block d-md-none card-title fw-bold text-decoration-none"><?= $row['name'] ?></a>
+                    <a href="<?= base_url('explore/' . $row['name']) ?>" class=" d-md-block d-none card-title h3 text-decoration-none"><?= $row['name'] ?></a>
                 </div>
             </div>
         </div>
     <?php endforeach;
     unset($row);
     ?>
+    <div class="col-md-3 col-6">
+        <form action="explore#popular" method="post">
+            <button class=" btn btn-danger btn-lg" style="min-height: 20vh;">See Full List</button>
+        </form>
+    </div>
 </div>
 
-<span class="fw-bold mb-0 fs-2 grad-right p-3 mt-5 mb-3 rounded-5">Now Playing</span>
+<span id="now" class="fw-bold mb-0 fs-2 grad-right p-3 mt-5 mb-3 rounded-5">Now Playing</span>
 <div class="my-4 row d-flex justify-content-center align-items-center">
     <?php foreach ($data as $row) :
     ?>
         <div class="col-lg-3 col-sm-4 col-6 d-flex align-items-stretch">
             <div class="card border-0 mb-md-3">
-                <a href="#">
+                <a href="<?= base_url('explore/' . $row['name']) ?>">
                     <img loading="lazy" class="d-md-block d-none bd-placeholder-img card-img-top" src="<?= $row['poster_url'] ?>" alt="<?= $row['name'] ?>" style="width: 200px;">
-                    <img loading="lazy" class="d-xs-block d-sm-none bd-placeholder-img card-img-top" src="<?= $row['poster_url'] ?>" alt="<?= $row['name'] ?>" style="width: 100px;">
+                    <img loading="lazy" class="d-xs-block d-md-none bd-placeholder-img card-img-top" src="<?= $row['poster_url'] ?>" alt="<?= $row['name'] ?>" style="width: 100px;">
                 </a>
                 <div class="card-body">
                     <span class="card-text"><?= $row['age_rating'] ?>+</span><br>
-                    <a href="#" class="vertical-truncate d-xs-block d-sm-none card-title fw-bold text-decoration-none"><?= $row['name'] ?></a>
-                    <a href="#" class=" d-md-block d-none card-title h3 text-decoration-none"><?= $row['name'] ?></a>
+                    <a href="<?= base_url('explore/' . $row['name']) ?>" class="vertical-truncate d-xs-block d-md-none card-title fw-bold text-decoration-none"><?= $row['name'] ?></a>
+                    <a href="<?= base_url('explore/' . $row['name']) ?>" class=" d-md-block d-none card-title h3 text-decoration-none"><?= $row['name'] ?></a>
                 </div>
             </div>
         </div>
@@ -119,11 +123,13 @@
     unset($row);
     ?>
 
-    <div class="col-md-3">
-        <form action="explore" method="post">
-            <button class=" btn btn-outline-danger btn-lg" style="min-height: 20vh;">See Full List</button>
+    <div class="col-md-3 col-6">
+        <form action="explore#now" method="post">
+            <button class=" btn btn-danger btn-lg" style="min-height: 20vh;">See Full List</button>
         </form>
     </div>
 </div>
+
+
 
 <?= $this->endSection(); ?>
