@@ -72,7 +72,7 @@ if (session()->get('isLoggedIn')) {
             </ul>
             <div class="btn-group rounded-5 d-flex my-3" role="group" aria-label="Basic outlined example">
                 <input required class="form-control rounded-0" type="text" placeholder="Search by keyword">
-                <button type="button" class="btn btn-outline-success">search</button>
+                <button type="button" class="btn btn-outline-danger">search</button>
             </div>
         </div>
     </div>
