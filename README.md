@@ -4,7 +4,7 @@
 This cinema webapp project is a requirement for joining [COMPFEST's Software Engineering Academy](https://www.compfest.id/academy/sea). 
 
 ## How to preview/run?
-You can preview it with the link [here]()
+You can preview it [here](http://rizalandit.000webhostapp.com/)
 Or, you can download the source code and follow the user guide of the framework [here](https://codeigniter4.github.io/userguide/)
 
 ## Server Requirements
