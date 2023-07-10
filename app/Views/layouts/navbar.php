@@ -16,7 +16,7 @@ if (session()->get('isLoggedIn')) {
 }
 
 ?>
-<div class="container d-lg-block d-none">
+<div class="container-fluid d-xl-block d-none">
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 border-bottom">
         <div class="col-md-3 mb-2 mb-md-0">
             <a href="<?= base_url() ?>" class="d-inline-flex link-body-emphasis text-decoration-none h3">
@@ -24,8 +24,8 @@ if (session()->get('isLoggedIn')) {
             </a>
         </div>
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="<?= base_url() ?>" class="nav-link fs-5 px-2 <?= (uri_string() == '') ? 'link-danger' : 'link-secondary'; ?>">Movies</a></li>
-            <li><a href="<?= base_url('explore') ?>" class="nav-link fs-5 px-2 <?= (uri_string() == 'explore') ? 'link-danger' : 'link-secondary'; ?>">Explore</a></li>
+            <!-- <li><a href="<?= base_url() ?>" class="nav-link fs-5 px-2 <?= (uri_string() == '') ? 'link-danger' : 'link-secondary'; ?>">Movies</a></li> -->
+            <!-- <li><a href="<?= base_url('explore') ?>" class="nav-link fs-5 px-2 <?= (uri_string() == 'explore') ? 'link-danger' : 'link-secondary'; ?>">Explore</a></li> -->
         </ul>
 
         <div class="col-md-3 text-end">
@@ -42,7 +42,7 @@ if (session()->get('isLoggedIn')) {
     </header>
 </div>
 
-<nav class="navbar navbar-expand-lg bg-body-tertiary d-sm-block d-lg-none">
+<nav class="navbar navbar-expand-lg bg-body-tertiary d-sm-block d-xl-none">
     <div class="container-fluid">
         <a href="<?= base_url() ?>" class="navbar-brand d-inline-flex link-body-emphasis text-decoration-none h3">
             SEA&nbsp;<span class="text-danger">Cinema</span>
@@ -56,7 +56,7 @@ if (session()->get('isLoggedIn')) {
                     <a class="nav-link" href="<?= base_url() ?>">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= base_url('explore') ?>">Explore</a>
+                    <!-- <a class="nav-link" href="<?= base_url('explore') ?>">Explore</a> -->
                 </li>
                 <!-- <span class="mb-3" style="text-underline-offset: 8px; text-decoration-color: red;">Rp0</span> -->
                 <?php if (!session()->get('isLoggedIn')) : ?>

@@ -10,8 +10,8 @@ class HomeController extends BaseController
     {
         $data = [
             'title' => "SEA Cinema",
-            'data' => $this->getFilm(0, 3),
-            'popular' => $this->getFilm([4, 5, 10]),
+            'data' => $this->getFilm(),
+            'popular' => $this->getFilm([1, 2, 3, 4, 5, 10]),
         ];
         // dd($data['data']);
         return view('home', $data);
