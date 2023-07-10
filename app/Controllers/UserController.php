@@ -73,16 +73,16 @@ class UserController extends BaseController
         if ($this->request->getMethod() == 'post') {
 
             $rules = [
-                'email' => 'required|min_length[6]|max_length[50]|valid_email|is_exist[user.email]',
-                'password' => 'required|min_length[8]|max_length[255]|validateUser[email,password]',
+                'username' => 'required|min_length[6]|max_length[50]|alpha_numeric|is_exist[user.username]',
+                'password' => 'required|min_length[8]|max_length[255]|validateUser[username,password]',
             ];
 
             $errors = [
-                'email' => [
-                    'is_exist' => "Email doesn't exist",
+                'username' => [
+                    'is_exist' => "Username doesn't exist",
                 ],
                 'password' => [
-                    'validateUser' => "Email or Password don't match",
+                    'validateUser' => "Username or Password don't match",
                 ],
             ];
 
@@ -92,7 +92,7 @@ class UserController extends BaseController
             }
             $model = new UserModel();
 
-            $user = $model->where('email', $this->request->getVar('email'))->first();
+            $user = $model->where('username', $this->request->getVar('username'))->first();
 
             $this->setUserSession($user);
             return redirect()->to('/');
@@ -106,7 +106,7 @@ class UserController extends BaseController
             'id' => $user['id'],
             'name' => $user['name'],
             'birthdate' => $user['birthdate'],
-            'email' => $user['email'],
+            'username' => $user['username'],
             'isLoggedIn' => true,
         ];
 
@@ -125,7 +125,7 @@ class UserController extends BaseController
             //let's do the validation here
             $rules = [
                 'name' => 'required|min_length[2]|max_length[255]',
-                'email' => 'required|min_length[5]|max_length[255]|valid_email|is_unique[user.email]',
+                'username' => 'required|min_length[5]|max_length[255]|alpha_numeric|is_unique[user.username]',
                 'birthdate' => 'required|valid_date[Y-m-d]',
                 'password' => 'required|min_length[8]|max_length[255]',
                 'password_confirm' => 'matches[password]',

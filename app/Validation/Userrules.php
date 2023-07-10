@@ -9,7 +9,7 @@ class Userrules
     public function validateUser(string $str, string $fields, array $data)
     {
         $model = new UserModel();
-        $user = $model->where('email', $data['email'])
+        $user = $model->where('username', $data['username'])
             ->first();
 
         if (!$user)
@@ -21,7 +21,7 @@ class Userrules
     public function is_exist(string $str, string $fields, array $data)
     {
         $model = new UserModel();
-        $user = $model->where('email', $data['email'])
+        $user = $model->where('username', $data['username'])
             ->first();
 
         if (!$user)

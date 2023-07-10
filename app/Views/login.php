@@ -1,7 +1,7 @@
 <?php
 $error = [
     'name' => false,
-    'email' => false,
+    'username' => false,
     'birthdate' => false,
     'password' => false,
     'password_confirm' => false,
@@ -20,10 +20,10 @@ if (session()->getFlashdata('error_login')) {
         <h5 class="fw-bold mb-4 fs-2 text-center">Sign in</h5>
         <form action="<?= base_url('login') ?>" method="post">
             <div class="form-floating mb-3">
-                <input required type="email" class="form-control rounded-3 <?= ($error['email']) ? 'is-invalid' : ''; ?>" id="email" value="<?= old('email') ?>" placeholder="sada" name="email">
-                <label for="email">Email</label>
-                <div id="invalid-email" class="invalid-feedback">
-                    <?= $error['email'] ?? '' ?>
+                <input required type="text" class="form-control rounded-3 <?= ($error['username']) ? 'is-invalid' : ''; ?>" id="username" value="<?= old('username') ?>" placeholder="sada" name="username" pattern="[A-Za-z0-9]+">
+                <label for="username">Username</label>
+                <div id="invalid-username" class="invalid-feedback">
+                    <?= $error['username'] ?? '' ?>
                 </div>
             </div>
             <div class="form-floating mb-3">

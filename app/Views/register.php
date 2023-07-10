@@ -1,6 +1,6 @@
 <?php $error = [
     'name' => false,
-    'email' => false,
+    'username' => false,
     'birthdate' => false,
     'password' => false,
     'password_confirm' => false,
@@ -26,10 +26,10 @@ if (session()->getFlashdata('error_register')) {
                 </div>
             </div>
             <div class="form-floating mb-3">
-                <input required type="email" name="email" class="form-control rounded-3 <?= ($error['email']) ? 'is-invalid' : ''; ?>" id="floatingInput" value="<?= old('email') ?>" placeholder="name@example.com">
-                <label for="floatingInput">Email address</label>
-                <div id="invalid-email" class="invalid-feedback">
-                    <?= $error['email'] ?? '' ?>
+                <input required type="text" name="username" class="form-control rounded-3 <?= ($error['username']) ? 'is-invalid' : ''; ?>" id="floatingInput" value="<?= old('username') ?>" placeholder="name@example.com" pattern="[A-Za-z0-9]+">
+                <label for="floatingInput">Username</label>
+                <div id="invalid-username" class="invalid-feedback">
+                    <?= $error['username'] ?? '' ?>
                 </div>
             </div>
             <div class="form-floating mb-3">
