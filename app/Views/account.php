@@ -2,13 +2,18 @@
 <?= $this->section('content'); ?>
 <?php
 $error = [
-    'name' => false,
-    'username' => false,
-    'birthdate' => false,
-    'password' => false,
-    'password_confirm' => false,
+    'name' => '',
+    'username' => '',
+    'birthdate' => '',
+    'password' => '',
+    'password_confirm' => '',
 ];
-?>
+if (session()->getFlashdata('error')) {
+    $su = session()->getFlashdata('error');
+    foreach ($su as $key => $val) {
+        $error[$key] = $val;
+    }
+} ?>
 <?php if (session()->get('success')) : ?>
     <div class="alert alert-success" role="alert">
         <?= session()->get('success') ?>
@@ -78,39 +83,40 @@ $error = [
         <h4>Account</h4>
     </div>
     <a href="logout" class="btn btn-danger mb-5">Logout</a>
-    <!-- <div class="mb-3" id="item-1-1">
+    <div class="mb-3" id="item-1-1">
         <h5 class="underline mb-4">Profile</h5>
         <form action="<?= base_url('update') ?>" method="post">
             <div class="form-floating mb-3">
-                <input required type="text" name="name" class="form-control rounded-3 <?= ($error['name']) ? 'is-invalid' : ''; ?>" id="name" value="<?= old('name') ?? $user['name'] ?>" placeholder="name">
+                <input type="hidden" name="id" value="<?= session()->get('id') ?>">
+                <input type="text" name="name" class="form-control rounded-3 <?= ($error['name']) ? 'is-invalid' : ''; ?>" id="name" value="<?= old('name') ?? $user['name'] ?>" placeholder="name">
                 <label for="name">Name</label>
                 <div id="invalid-name" class="invalid-feedback">
                     <?= $error['name'] ?? '' ?>
                 </div>
             </div>
             <div class="form-floating mb-3">
-                <input required type="text" name="username" class="form-control rounded-3 <?= ($error['username']) ? 'is-invalid' : ''; ?>" id="floatingInput" value="<?= old('username') ?? $user['username'] ?>" placeholder="name@example.com">
+                <input type="text" name="username" class="form-control rounded-3 <?= ($error['username']) ? 'is-invalid' : ''; ?>" id="floatingInput" value="<?= old('username') ?? $user['username'] ?>" placeholder="name@example.com">
                 <label for="floatingInput">Username</label>
                 <div id="invalid-username" class="invalid-feedback">
                     <?= $error['username'] ?? '' ?>
                 </div>
             </div>
             <div class="form-floating mb-3">
-                <input required type="date" name="birthdate" class="form-control rounded-3 <?= ($error['birthdate']) ? 'is-invalid' : ''; ?>" id="birthdate" placeholder="lol" value="<?= old('birthdate') ?? $user['birthdate'] ?>">
+                <input type="date" name="birthdate" class="form-control rounded-3 <?= ($error['birthdate']) ? 'is-invalid' : ''; ?>" id="birthdate" placeholder="lol" value="<?= old('birthdate') ?? $user['birthdate'] ?>">
                 <label for="birthdate">Birth date</label>
                 <div id="invalid-birthdate" class="invalid-feedback">
                     <?= $error['birthdate'] ?? '' ?>
                 </div>
             </div>
             <div class="form-floating mb-3">
-                <input required type="password" name="password" class="form-control rounded-3 <?= ($error['password']) ? 'is-invalid' : ''; ?>" id="password1" value="<?= old('password') ?>" placeholder="Password1">
+                <input type="password" name="password" class="form-control rounded-3 <?= ($error['password']) ? 'is-invalid' : ''; ?>" id="password1" value="<?= old('password') ?>" placeholder="Password1">
                 <label for="password1">Password</label>
                 <div id="invalid-password" class="invalid-feedback">
                     <?= $error['password'] ?? '' ?>
                 </div>
             </div>
             <div class="form-floating mb-3">
-                <input required type="password" name="password_confirm" class="form-control rounded-3 <?= ($error['password_confirm']) ? 'is-invalid' : ''; ?>" id="password2" placeholder="Password">
+                <input type="password" name="password_confirm" class="form-control rounded-3 <?= ($error['password_confirm']) ? 'is-invalid' : ''; ?>" id="password2" placeholder="Password">
                 <label for="password2">Confirm Password</label>
                 <div id="invalid-password_confirm" class="invalid-feedback">
                     <?= $error['password_confirm'] ?? '' ?>
@@ -118,7 +124,7 @@ $error = [
             </div>
             <button class="w-100 mb-2 btn btn-lg rounded-3 btn-danger" type="submit">Update</button>
         </form>
-    </div> -->
+    </div>
 </div>
 <!-- </div>
 </div> -->

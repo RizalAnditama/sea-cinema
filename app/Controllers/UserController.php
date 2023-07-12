@@ -147,6 +147,59 @@ class UserController extends BaseController
         return view('register', $data);
     }
 
+    public function update()
+    {
+        $model = new UserModel();
+        $id = $this->request->getPost('id');
+        $userData = $model->find($id);
+        // dd($userData);
+        if ($userData['username'] != $this->request->getPost('username')) {
+            $username = 'required|min_length[5]|max_length[255]|alpha_numeric|is_unique[user.username]';
+        } else {
+            $username = 'required|min_length[5]|max_length[255]|alpha_numeric';
+        }
+
+        if ($this->request->getPost('password') == '') {
+            $password = 'permit_empty';
+            $password_confirm = 'permit_empty';
+        } else {
+            $password = 'min_length[8]|max_length[255]';
+            $password_confirm = 'matches[password]';
+        }
+        $rules = [
+            'name' => 'required|min_length[2]|max_length[255]',
+            'username' => $username,
+            'birthdate' => 'required|valid_date[Y-m-d]',
+            'password' => $password,
+            'password_confirm' => $password_confirm,
+        ];
+
+        if (!$this->validate($rules)) {
+            session()->setFlashdata('error', $this->validator->getErrors());
+            // dd(session()->get('error'));
+            return redirect()->back()->withInput();
+        }
+
+        $data = [
+            'id' => $id,
+            'name' => $this->request->getPost('name'),
+            'username' => $this->request->getPost('username'),
+            'birthdate' => $this->request->getPost('birthdate'),
+        ];
+
+        if ($this->request->getPost('password') != '') {
+            $data['password'] = $this->request->getPost('password');
+        }
+
+        $this->setUserSession($data);
+
+        if (!$model->update($id, $data)) {
+            return redirect()->back()->withInput()->with('error', 'Gagal update');
+        }
+
+        return redirect()->back()->with('success', 'Account information updated successfully!');
+    }
+
     public function profile()
     {
         $data = [];

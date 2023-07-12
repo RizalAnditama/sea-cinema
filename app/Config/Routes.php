@@ -46,6 +46,7 @@ $routes->add('register', 'UserController::register', ['filter' => 'noauth']);
 $routes->add('login', 'UserController::login', ['filter' => 'noauth']);
 $routes->get('logout', 'UserController::logout', ['filter' => 'auth']);
 $routes->get('account', 'UserController::account', ['filter' => 'auth']);
+$routes->post('update', 'UserController::update', ['filter' => 'auth']);
 
 $routes->post('topup', 'UserController::topup', ['filter' => 'auth']);
 $routes->post('withdraw', 'UserController::withdraw', ['filter' => 'auth']);
