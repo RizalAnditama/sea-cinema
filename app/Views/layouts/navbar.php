@@ -89,7 +89,7 @@ if (session()->get('isLoggedIn')) {
             <div class="modal-body p-5 pt-0">
                 <h1 class="fw-bold mb-0 fs-3">What are you searching for?</h1>
                 <hr>
-                <form action="<?= base_url('explore') ?>" method="get">
+                <form action="<?= base_url('search') ?>" method="get">
                     <div class="form-floating mb-3">
                         <input required type="text" name="keyword" class="form-control rounded-3" id="search" placeholder="sada">
                         <label for="search">Search by Keyword</label>

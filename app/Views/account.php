@@ -74,10 +74,10 @@ $error = [
         <?php endif ?>
     </div>
     <hr>
-    <div class="my-2 " id="item-1">
+    <div class="my-2" id="item-1">
         <h4>Account</h4>
     </div>
-    <a href="logout" class="btn btn-danger">Logout</a>
+    <a href="logout" class="btn btn-danger mb-5">Logout</a>
     <!-- <div class="mb-3" id="item-1-1">
         <h5 class="underline mb-4">Profile</h5>
         <form action="<?= base_url('update') ?>" method="post">

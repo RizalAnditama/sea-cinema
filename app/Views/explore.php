@@ -1,6 +1,6 @@
 <?= $this->extend('layouts/app'); ?>
 <?= $this->section('content'); ?>
-<span id="popular" class="fw-bold mb-0 fs-2 grad-right p-3 my-3 rounded-5">Popular</span>
+<!-- <span id="popular" class="fw-bold mb-0 fs-2 grad-right p-3 my-3 rounded-5">Popular</span>
 <div class="my-4 row">
     <?php foreach ($popular as $row) :
     ?>
@@ -20,7 +20,7 @@
     <?php endforeach;
     unset($row);
     ?>
-</div>
+</div> -->
 
 <span id="now" class="fw-bold mb-0 fs-2 grad-right p-3 my-3 rounded-5">Now Playing</span>
 <div class="my-4 row d-flex justify-content-center align-items-center">

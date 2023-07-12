@@ -39,7 +39,8 @@ $routes->post('pay', 'MovieController::pay', ['filter' => 'auth']);
 
 $routes->get('/', 'HomeController::index');
 $routes->add('explore', 'HomeController::explore');
-$routes->get('/explore/(:any)', 'HomeController::explore/$1');
+$routes->get('explore/(:any)', 'HomeController::explore/$1');
+$routes->get('search', 'HomeController::search');
 
 $routes->add('register', 'UserController::register', ['filter' => 'noauth']);
 $routes->add('login', 'UserController::login', ['filter' => 'noauth']);

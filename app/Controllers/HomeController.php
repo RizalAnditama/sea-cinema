@@ -57,24 +57,27 @@ class HomeController extends BaseController
         return view('explore', $data);
     }
 
-    public function search($keyword)
+    public function search()
     {
         $model = new HomeModel();
-        $keys = explode(" ", $keyword);
+        // $keys = explode(" ", $keyword);
 
-        $sql = "SELECT * FROM film WHERE name LIKE '%$keyword%' ";
+        $keyword = $_GET['keyword'];
+        // $sql = "SELECT * FROM film WHERE name LIKE '%$keyword%' ";
+        // $sql = "select * from film where MATCH(name,description,release_date,poster_url,age_rating,ticket_price) AGAINST ('%" . $keyword . "%')";
 
-        foreach ($keys as $k) {
-            $sql .= " OR name LIKE '%$k%' ";
-        }
+        // foreach ($keys as $k) {
+        //     $sql .= " OR name LIKE '%$k%' ";
+        // }
         // dd($sql);
 
         $data = [
             'title' => "'$keyword' | SEA Cinema",
-            'data' => $model->db->query($sql)->getResultArray(),
+            // 'data' => $model->db->query($sql)->getResultArray(),
+            'data' => $model->like('name', $keyword)->orLike('description', $keyword)->findAll(),
             'popular' => [],
         ];
-        // dd($data);
+        // dd($data['data']);
         return view('explore', $data);
     }
 }
