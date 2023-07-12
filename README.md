@@ -18,6 +18,7 @@ Or, you can install the source code and follow the user guide [here](#run-locall
 - Top up and withdraw balance
 - Order up to 6 tickets
 - Cancel and refund
+- Edit your account information
 
 
 ## Run Locally
