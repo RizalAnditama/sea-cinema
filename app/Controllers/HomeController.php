@@ -3,15 +3,26 @@
 namespace App\Controllers;
 
 use App\Models\HomeModel;
+use App\Models\MovieModel;
 
 class HomeController extends BaseController
 {
-    public function index()
+    public function test()
     {
         $data = [
+            'title' => 'Testing site | SEA Cinema',
+        ];
+
+        return view('test', $data);
+    }
+
+    public function index()
+    {
+        $model = new MovieModel();
+        $data = [
             'title' => "SEA Cinema",
-            'data' => $this->getFilm(),
-            'popular' => $this->getFilm([1, 2, 3, 4, 5, 10]),
+            'data' => $model->getFilm(),
+            'popular' => $model->getFilm([1, 2, 3, 4, 5, 10]),
         ];
         // dd($data['data']);
         return view('home', $data);
@@ -19,10 +30,16 @@ class HomeController extends BaseController
 
     public function explore(string $movie_name = null)
     {
+        $model = new MovieModel();
+        $data = $model->where('name', $movie_name)->first();
+        if (session()->get('isLoggedIn') && session()->get('user_age') < $data['age_rating']) {
+            session()->setFlashdata('validation', "You're not old enough for this movie (check age rating)");
+        }
+
         $data = [
             'title' => 'Explore | SEA Cinema',
-            'data' => $this->getFilm(),
-            'popular' => $this->getFilm([1, 2, 3, 4, 5, 10]),
+            'data' => $model->getFilm(),
+            'popular' => $model->getFilm([1, 2, 3, 4, 5, 10]),
         ];
 
         if ($this->request->getGet('keyword')) {
@@ -31,8 +48,8 @@ class HomeController extends BaseController
 
         if ($movie_name) {
             $data = [
-                'title' => $movie_name . "|SEA Cinema",
-                'data' => $this->getFilm($movie_name)[0],
+                'title' => $movie_name . "| SEA Cinema",
+                'data' => $model->getFilm($movie_name)[0],
             ];
             // dd($data['data']);
             return view('exploreDetail', $data);
@@ -59,22 +76,5 @@ class HomeController extends BaseController
         ];
         // dd($data);
         return view('explore', $data);
-    }
-
-    public function getFilm($id = 0, $limit = null)
-    {
-        $model = new HomeModel();
-
-        if (is_array($id)) {
-            return $model->db->table('film')->whereIn('id', $id)->get()->getResultArray();
-        }
-        if (is_string($id)) {
-            return $model->db->table('film')->where('name', $id)->get()->getResultArray();
-        }
-        if ($limit) {
-            return $model->db->table('film')->limit($limit)->get()->getResultArray();
-        }
-
-        return $model->findAll();
     }
 }

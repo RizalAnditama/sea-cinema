@@ -81,8 +81,8 @@
         <div class="col-lg-3 col-sm-4 col-6 d-flex justify-content-center align-items-stretch">
             <div class="card border-0 mb-md-3">
                 <a href="<?= base_url('explore/' . $row['name']) ?>" class="d-flex justify-content-center align-items-center">
-                    <img loading="lazy" class="d-md-block d-none bd-placeholder-img card-img-top" src="<?= $row['poster_url'] ?>" alt="<?= $row['name'] ?>" style="width: 200px;">
-                    <img loading="lazy" class="d-sm-block d-md-none bd-placeholder-img card-img-top" src="<?= $row['poster_url'] ?>" alt="<?= $row['name'] ?>" style="width: 100px;">
+                    <img loading="lazy" class="d-md-block d-none bd-placeholder-img card-img-top shadow rounded-5" src="<?= $row['poster_url'] ?>" alt="<?= $row['name'] ?>" style="width: 200px;">
+                    <img loading="lazy" class="d-sm-block d-md-none bd-placeholder-img card-img-top shadow rounded-5" src="<?= $row['poster_url'] ?>" alt="<?= $row['name'] ?>" style="width: 100px;">
                 </a>
                 <div class="card-body text-center">
                     <span class="card-text"><?= $row['age_rating'] ?>+</span><br>
@@ -103,8 +103,8 @@
         <div class="col-lg-3 col-sm-4 col-6 d-flex justify-content-center align-items-stretch">
             <div class="card border-0 mb-md-3">
                 <a href="<?= base_url('explore/' . $row['name']) ?>" class="d-flex justify-content-center align-items-center">
-                    <img loading="lazy" class="d-md-block d-none bd-placeholder-img card-img-top" src="<?= $row['poster_url'] ?>" alt="<?= $row['name'] ?>" style="width: 200px;">
-                    <img loading="lazy" class="d-sm-block d-md-none bd-placeholder-img card-img-top" src="<?= $row['poster_url'] ?>" alt="<?= $row['name'] ?>" style="width: 100px;">
+                    <img loading="lazy" class="d-md-block d-none bd-placeholder-img card-img-top shadow rounded-5" src="<?= $row['poster_url'] ?>" alt="<?= $row['name'] ?>" style="width: 200px;">
+                    <img loading="lazy" class="d-sm-block d-md-none bd-placeholder-img card-img-top shadow rounded-5" src="<?= $row['poster_url'] ?>" alt="<?= $row['name'] ?>" style="width: 100px;">
                 </a>
                 <div class="card-body text-center">
                     <span class="card-text"><?= $row['age_rating'] ?>+</span><br>

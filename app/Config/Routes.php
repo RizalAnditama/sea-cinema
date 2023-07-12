@@ -29,6 +29,14 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
+
+$routes->get('test', 'MovieController::test');
+$routes->add('seat', 'MovieController::seat', ['filter' => 'auth']);
+$routes->post('seat/(:any)', 'MovieController::seat/$1', ['filter' => 'auth']);
+$routes->post('book/(:any)', 'MovieController::book/$1', ['filter' => 'auth']);
+$routes->get('receipt', 'MovieController::receipt', ['filter' => 'auth']);
+$routes->post('pay', 'MovieController::pay', ['filter' => 'auth']);
+
 $routes->get('/', 'HomeController::index');
 $routes->add('explore', 'HomeController::explore');
 $routes->get('/explore/(:any)', 'HomeController::explore/$1');

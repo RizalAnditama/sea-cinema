@@ -30,7 +30,7 @@ class UserController extends BaseController
         $balance = $data['balance'];
         $balance_now = ['balance' => $balance + $amount];
         $model->update($id, $balance_now);
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Top up successful!');
     }
 
     public function withdraw()
@@ -42,14 +42,14 @@ class UserController extends BaseController
         $balance = $data['balance'];
         $balance_now = ['balance' => $balance - $amount];
         $model->update($id, $balance_now);
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Withdrawal successful!');
     }
 
     public function history($id, $status = 'on')
     {
         $model = new UserModel();
         $historyModel = new HistoryModel();
-        $data = $model->db->table('history')->join('user', 'user.id=history.user_id')->join('film', 'film.id=history.movie_id')->where('user_id', $id)->orderBy('movie_id', 'DESC')->get()->getResultArray();
+        $data = $model->db->table('history')->join('user', 'user.id=history.user_id')->join('film', 'film.id=history.movie_id')->where('user_id', $id)->orderBy('movie_id', 'ASC')->get()->getResultArray();
         $no = 0;
         foreach ($data as $key) {
             $user_id = $key['user_id'];
@@ -95,7 +95,7 @@ class UserController extends BaseController
             $user = $model->where('username', $this->request->getVar('username'))->first();
 
             $this->setUserSession($user);
-            return redirect()->to('/');
+            return redirect()->back();
         }
         return view('login', $data);
     }
@@ -109,6 +109,7 @@ class UserController extends BaseController
             'username' => $user['username'],
             'isLoggedIn' => true,
         ];
+        $data['user_age'] = date_diff(date_create($data['birthdate']), date_create('now'))->y;
 
         session()->set($data);
         return true;
@@ -141,7 +142,7 @@ class UserController extends BaseController
             $insert = $model->insert($newData);
             $newData['id'] = $insert;
             $this->setUserSession($newData);
-            return redirect()->to('/');
+            return redirect()->back();
         }
         return view('register', $data);
     }
