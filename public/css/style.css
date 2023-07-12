@@ -57,9 +57,54 @@ img.cover {
     -webkit-box-orient: vertical;
   }
 }
+
+/* For mobile phones: */
+.seat {
+  /* margin-top: 70vh; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: auto;
+  max-width: 150%;
+}
+
+@media only screen and (min-width: 600px) {
+  /* For tablets: */
+  .seat {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: visible;
+    max-width: 95%;
+  }
+}
+
 @media only screen and (min-width: 768px) {
   /* For desktop: */
-  img.cover {
-    max-width: 300px;
+  .seat {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 80%;
+  }
+}
+
+@media only screen and (min-width: 990px) {
+  /* For desktop: */
+  .seat {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 60%;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  /* For desktop: */
+  .seat {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 50%;
   }
 }
