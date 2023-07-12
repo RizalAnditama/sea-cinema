@@ -77,7 +77,8 @@ $error = [
     <div class="my-2 " id="item-1">
         <h4>Account</h4>
     </div>
-    <div class="mb-3" id="item-1-1">
+    <a href="logout" class="btn btn-danger">Logout</a>
+    <!-- <div class="mb-3" id="item-1-1">
         <h5 class="underline mb-4">Profile</h5>
         <form action="<?= base_url('update') ?>" method="post">
             <div class="form-floating mb-3">
@@ -117,7 +118,7 @@ $error = [
             </div>
             <button class="w-100 mb-2 btn btn-lg rounded-3 btn-danger" type="submit">Update</button>
         </form>
-    </div>
+    </div> -->
 </div>
 <!-- </div>
 </div> -->

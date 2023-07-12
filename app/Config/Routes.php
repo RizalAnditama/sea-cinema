@@ -43,7 +43,7 @@ $routes->get('/explore/(:any)', 'HomeController::explore/$1');
 
 $routes->add('register', 'UserController::register', ['filter' => 'noauth']);
 $routes->add('login', 'UserController::login', ['filter' => 'noauth']);
-$routes->post('logout', 'UserController::logout', ['filter' => 'auth']);
+$routes->get('logout', 'UserController::logout', ['filter' => 'auth']);
 $routes->get('account', 'UserController::account', ['filter' => 'auth']);
 
 $routes->post('topup', 'UserController::topup', ['filter' => 'auth']);
