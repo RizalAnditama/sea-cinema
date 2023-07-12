@@ -34,7 +34,7 @@ class History extends Migration
                 'default'        => 'on',
             ],
             'date' => [
-                'type'           => 'date',
+                'type'           => 'TIMESTAMP',
             ],
         ]);
 

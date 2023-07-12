@@ -182,7 +182,7 @@ class MovieController extends BaseController
                 'user_id' => session()->get('id'),
                 'seat_number' => $key,
                 'status' => 'on',
-                'date' => date('Y-m-d'),
+                'date' => date('Y-m-d H:i:s'),
             ];
             if (!$model->insert($data)) {
                 return redirect()->back()->with('validation', 'Something went wrong, try again later');
