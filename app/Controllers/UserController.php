@@ -49,7 +49,7 @@ class UserController extends BaseController
     {
         $model = new UserModel();
         $historyModel = new HistoryModel();
-        $data = $model->db->table('history')->join('user', 'user.id=history.user_id')->join('film', 'film.id=history.movie_id')->where('user_id', $id)->orderBy('movie_id', 'ASC')->get()->getResultArray();
+        $data = $model->db->table('history')->join('user', 'user.id=history.user_id')->join('film', 'film.id=history.movie_id')->where('user_id', $id)->orderBy('date', 'DESC')->get()->getResultArray();
         $no = 0;
         foreach ($data as $key) {
             $user_id = $key['user_id'];

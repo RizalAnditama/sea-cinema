@@ -34,14 +34,14 @@
             <h5 class="underline my-3">Age Rating</h5>
             <span><?= $data['age_rating'] ?>+</span>
             <h5 class="underline my-3">Description</h5>
-            <span><?= $data['description'] ?></span>
+            <span class="text-justify"><?= $data['description'] ?></span>
             <h5 class="underline my-3">Release Date</h5>
             <span><?= date('D, d F Y', strtotime($data['release_date'])) ?></span>
         </div>
     </div>
     <div class="d-block d-sm-none mb-3">
         <h5 class="underline my-3">Description</h5>
-        <span><?= $data['description'] ?></span>
+        <span class="text-justify"><?= $data['description'] ?></span>
         <!-- <h5 class="underline my-3">Age Rating</h5>
         <span><?= $data['age_rating'] ?>+</span> -->
         <h5 class="underline my-3">Release Date</h5>
