@@ -24,7 +24,7 @@ class Film extends Migration
                 'type'           => 'text',
             ],
             'release_date' => [
-                'type'           => 'date',
+                'type'           => 'timestamp',
             ],
             'poster_url'      => [
                 'type'           => 'varchar',

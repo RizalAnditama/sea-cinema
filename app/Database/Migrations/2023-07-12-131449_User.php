@@ -29,7 +29,7 @@ class User extends Migration
                 'constraint'     => '255'
             ],
             'birthdate' => [
-                'type'           => 'date',
+                'type'           => 'timestamp',
             ],
             'balance'      => [
                 'type'           => 'int',
