@@ -38,12 +38,13 @@ Go to the project directory
     cd sea-cinema
 ```
 
-Create database, run migration and seed
+*Create database, run migration and seed
 ```bash
     php spark db:create sea-cinema
     php spark db:seed film
     php spark migrate
 ```
+*note : Please check your username and password in app/Config/database.php (the default is username:'root' and password:'')*
 
 Start the server
 ```bash
